@@ -1,0 +1,566 @@
+diff -r ./aclocal.m4 ../../original_source/rtorrent-0.8.6/aclocal.m4
+90,99c90,97
+< [if test -n "$PKG_CONFIG"; then
+<     if test -n "$$1"; then
+<         pkg_cv_[]$1="$$1"
+<     else
+<         PKG_CHECK_EXISTS([$3],
+<                          [pkg_cv_[]$1=`$PKG_CONFIG --[]$2 "$3" 2>/dev/null`],
+< 			 [pkg_failed=yes])
+<     fi
+< else
+< 	pkg_failed=untried
+---
+> [if test -n "$$1"; then
+>     pkg_cv_[]$1="$$1"
+>  elif test -n "$PKG_CONFIG"; then
+>     PKG_CHECK_EXISTS([$3],
+>                      [pkg_cv_[]$1=`$PKG_CONFIG --[]$2 "$3" 2>/dev/null`],
+> 		     [pkg_failed=yes])
+>  else
+>     pkg_failed=untried
+143c141
+< 	        $1[]_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "$2"`
+---
+> 	        $1[]_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "$2" 2>&1`
+145c143
+< 	        $1[]_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "$2"`
+---
+> 	        $1[]_PKG_ERRORS=`$PKG_CONFIG --print-errors "$2" 2>&1`
+diff -r ./configure ../../original_source/rtorrent-0.8.6/configure
+5484c5484
+< netbsd* | netbsdelf*-gnu)
+---
+> netbsd*)
+8895,8897d8894
+<   linux* | k*bsd*-gnu)
+<     link_all_deplibs=no
+<     ;;
+9080c9077
+<     netbsd* | netbsdelf*-gnu)
+---
+>     netbsd*)
+9255d9251
+< 	link_all_deplibs=no
+9582c9578
+<     netbsd* | netbsdelf*-gnu)
+---
+>     netbsd*)
+10527,10538d10522
+< netbsdelf*-gnu)
+<   version_type=linux
+<   need_lib_prefix=no
+<   need_version=no
+<   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+<   soname_spec='${libname}${release}${shared_ext}$major'
+<   shlibpath_var=LD_LIBRARY_PATH
+<   shlibpath_overrides_runpath=no
+<   hardcode_into_libs=yes
+<   dynamic_linker='NetBSD ld.elf_so'
+<   ;;
+< 
+11159c11143
+< #line 11159 "configure"
+---
+> #line 11143 "configure"
+11255c11239
+< #line 11255 "configure"
+---
+> #line 11239 "configure"
+13087c13071
+<       netbsd* | netbsdelf*-gnu)
+---
+>       netbsd*)
+13211c13195
+<    (eval echo "\"\$as_me:13211: $lt_compile\"" >&5)
+---
+>    (eval echo "\"\$as_me:13195: $lt_compile\"" >&5)
+13215c13199
+<    echo "$as_me:13215: \$? = $ac_status" >&5
+---
+>    echo "$as_me:13199: \$? = $ac_status" >&5
+13310c13294
+<    (eval echo "\"\$as_me:13310: $lt_compile\"" >&5)
+---
+>    (eval echo "\"\$as_me:13294: $lt_compile\"" >&5)
+13314c13298
+<    echo "$as_me:13314: \$? = $ac_status" >&5
+---
+>    echo "$as_me:13298: \$? = $ac_status" >&5
+13362c13346
+<    (eval echo "\"\$as_me:13362: $lt_compile\"" >&5)
+---
+>    (eval echo "\"\$as_me:13346: $lt_compile\"" >&5)
+13366c13350
+<    echo "$as_me:13366: \$? = $ac_status" >&5
+---
+>    echo "$as_me:13350: \$? = $ac_status" >&5
+13438,13440d13421
+<   linux* | k*bsd*-gnu)
+<     link_all_deplibs_CXX=no
+<   ;;
+13995,14006d13975
+< netbsdelf*-gnu)
+<   version_type=linux
+<   need_lib_prefix=no
+<   need_version=no
+<   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+<   soname_spec='${libname}${release}${shared_ext}$major'
+<   shlibpath_var=LD_LIBRARY_PATH
+<   shlibpath_overrides_runpath=no
+<   hardcode_into_libs=yes
+<   dynamic_linker='NetBSD ld.elf_so'
+<   ;;
+< 
+15574,15578c15543,15546
+< if test -n "$PKG_CONFIG"; then
+<     if test -n "$sigc_CFLAGS"; then
+<         pkg_cv_sigc_CFLAGS="$sigc_CFLAGS"
+<     else
+<         if test -n "$PKG_CONFIG" && \
+---
+> if test -n "$sigc_CFLAGS"; then
+>     pkg_cv_sigc_CFLAGS="$sigc_CFLAGS"
+>  elif test -n "$PKG_CONFIG"; then
+>     if test -n "$PKG_CONFIG" && \
+15588,15590c15556,15557
+<     fi
+< else
+< 	pkg_failed=untried
+---
+>  else
+>     pkg_failed=untried
+15592,15596c15559,15562
+< if test -n "$PKG_CONFIG"; then
+<     if test -n "$sigc_LIBS"; then
+<         pkg_cv_sigc_LIBS="$sigc_LIBS"
+<     else
+<         if test -n "$PKG_CONFIG" && \
+---
+> if test -n "$sigc_LIBS"; then
+>     pkg_cv_sigc_LIBS="$sigc_LIBS"
+>  elif test -n "$PKG_CONFIG"; then
+>     if test -n "$PKG_CONFIG" && \
+15606,15608c15572,15573
+<     fi
+< else
+< 	pkg_failed=untried
+---
+>  else
+>     pkg_failed=untried
+15621c15586
+< 	        sigc_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "sigc++-2.0"`
+---
+> 	        sigc_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "sigc++-2.0" 2>&1`
+15623c15588
+< 	        sigc_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "sigc++-2.0"`
+---
+> 	        sigc_PKG_ERRORS=`$PKG_CONFIG --print-errors "sigc++-2.0" 2>&1`
+15666,15670c15631,15634
+< if test -n "$PKG_CONFIG"; then
+<     if test -n "$libcurl_CFLAGS"; then
+<         pkg_cv_libcurl_CFLAGS="$libcurl_CFLAGS"
+<     else
+<         if test -n "$PKG_CONFIG" && \
+---
+> if test -n "$libcurl_CFLAGS"; then
+>     pkg_cv_libcurl_CFLAGS="$libcurl_CFLAGS"
+>  elif test -n "$PKG_CONFIG"; then
+>     if test -n "$PKG_CONFIG" && \
+15680,15682c15644,15645
+<     fi
+< else
+< 	pkg_failed=untried
+---
+>  else
+>     pkg_failed=untried
+15684,15688c15647,15650
+< if test -n "$PKG_CONFIG"; then
+<     if test -n "$libcurl_LIBS"; then
+<         pkg_cv_libcurl_LIBS="$libcurl_LIBS"
+<     else
+<         if test -n "$PKG_CONFIG" && \
+---
+> if test -n "$libcurl_LIBS"; then
+>     pkg_cv_libcurl_LIBS="$libcurl_LIBS"
+>  elif test -n "$PKG_CONFIG"; then
+>     if test -n "$PKG_CONFIG" && \
+15698,15700c15660,15661
+<     fi
+< else
+< 	pkg_failed=untried
+---
+>  else
+>     pkg_failed=untried
+15713c15674
+< 	        libcurl_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "libcurl >= 7.15.4"`
+---
+> 	        libcurl_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "libcurl >= 7.15.4" 2>&1`
+15715c15676
+< 	        libcurl_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libcurl >= 7.15.4"`
+---
+> 	        libcurl_PKG_ERRORS=`$PKG_CONFIG --print-errors "libcurl >= 7.15.4" 2>&1`
+15758,15762c15719,15722
+< if test -n "$PKG_CONFIG"; then
+<     if test -n "$libtorrent_CFLAGS"; then
+<         pkg_cv_libtorrent_CFLAGS="$libtorrent_CFLAGS"
+<     else
+<         if test -n "$PKG_CONFIG" && \
+---
+> if test -n "$libtorrent_CFLAGS"; then
+>     pkg_cv_libtorrent_CFLAGS="$libtorrent_CFLAGS"
+>  elif test -n "$PKG_CONFIG"; then
+>     if test -n "$PKG_CONFIG" && \
+15772,15774c15732,15733
+<     fi
+< else
+< 	pkg_failed=untried
+---
+>  else
+>     pkg_failed=untried
+15776,15780c15735,15738
+< if test -n "$PKG_CONFIG"; then
+<     if test -n "$libtorrent_LIBS"; then
+<         pkg_cv_libtorrent_LIBS="$libtorrent_LIBS"
+<     else
+<         if test -n "$PKG_CONFIG" && \
+---
+> if test -n "$libtorrent_LIBS"; then
+>     pkg_cv_libtorrent_LIBS="$libtorrent_LIBS"
+>  elif test -n "$PKG_CONFIG"; then
+>     if test -n "$PKG_CONFIG" && \
+15790,15792c15748,15749
+<     fi
+< else
+< 	pkg_failed=untried
+---
+>  else
+>     pkg_failed=untried
+15805c15762
+< 	        libtorrent_PKG_ERRORS=`$PKG_CONFIG --short-errors --errors-to-stdout --print-errors "libtorrent >= 0.12.6"`
+---
+> 	        libtorrent_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors "libtorrent >= 0.12.6" 2>&1`
+15807c15764
+< 	        libtorrent_PKG_ERRORS=`$PKG_CONFIG --errors-to-stdout --print-errors "libtorrent >= 0.12.6"`
+---
+> 	        libtorrent_PKG_ERRORS=`$PKG_CONFIG --print-errors "libtorrent >= 0.12.6" 2>&1`
+Only in .: diff
+Only in ./doc: Makefile.bak
+diff -r ./scripts/libtool.m4 ../../original_source/rtorrent-0.8.6/scripts/libtool.m4
+2488,2499d2487
+< netbsdelf*-gnu)
+<   version_type=linux
+<   need_lib_prefix=no
+<   need_version=no
+<   library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major ${libname}${shared_ext}'
+<   soname_spec='${libname}${release}${shared_ext}$major'
+<   shlibpath_var=LD_LIBRARY_PATH
+<   shlibpath_overrides_runpath=no
+<   hardcode_into_libs=yes
+<   dynamic_linker='NetBSD ld.elf_so'
+<   ;;
+< 
+3091c3079
+< netbsd* | netbsdelf*-gnu)
+---
+> netbsd*)
+3772c3760
+<       netbsd* | netbsdelf*-gnu)
+---
+>       netbsd*)
+4197,4199d4184
+<   linux* | k*bsd*-gnu)
+<     _LT_TAGVAR(link_all_deplibs, $1)=no
+<   ;;
+4264,4266d4248
+<   linux* | k*bsd*-gnu)
+<     _LT_TAGVAR(link_all_deplibs, $1)=no
+<     ;;
+4449c4431
+<     netbsd* | netbsdelf*-gnu)
+---
+>     netbsd*)
+4624d4605
+< 	_LT_TAGVAR(link_all_deplibs, $1)=no
+4863c4844
+<     netbsd* | netbsdelf*-gnu)
+---
+>     netbsd*)
+Only in ./src: .rtorrent.rc
+Only in ./src: Makefile.bak
+diff -r ./src/command_download.cc ../../original_source/rtorrent-0.8.6/src/command_download.cc
+49d48
+< #include <torrent/download.h>
+65,67d63
+< #include "download/download_wrapper.h"
+< 
+< #include <iostream>
+323,377d318
+< void
+< apply_update_ID(core::Download* download, const std::string& arg){
+< 	/*std::string my_ID;
+< 
+< 	try {
+< 	    my_ID = download->bencode()->get_key("rtorrent").get_key("custom").get_key_string("ID");
+< 
+< 	  } catch (torrent::bencode_error& e) {
+< 	    std::cout << "Error retrieving ID: " << e.what() << std::endl << std::flush;
+< 	  }
+< */
+< 	uint32_t myID, peerN ;
+< 
+< 	int ret = std::sscanf (arg.c_str(),"%d/%d", &myID, &peerN);
+< 
+< 	if (ret != 2) {
+< 		std::cout << "Could not parse my ID and total peer number in my group from " << arg << std::endl << std::flush;
+< 	} else {
+< 		download->download()->ptr()->main()->update_ID(myID, peerN);
+< 	}
+< }
+< 
+< struct call_remove_d_peer_t {
+<   call_remove_d_peer_t(core::Download* d, int port) : m_download(d), m_port(port) { }
+< 
+<   void operator() (const sockaddr* sa, int err) {
+<     if (sa == NULL)
+<       control->core()->push_log("Could not resolve host.");
+<     else
+<       m_download->download()->remove_peer(sa, m_port);
+<   }
+< 
+<   core::Download* m_download;
+<   int m_port;
+< };
+< 
+< void
+< apply_d_remove_peer(core::Download* download, const std::string& arg) {
+<   int port, ret;
+<   char dummy;
+<   char host[1024];
+< 
+<   ret = std::sscanf(arg.c_str(), "%1023[^:]:%i%c", host, &port, &dummy);
+< 
+<   if (ret == 1)
+<     port = 6881;
+<   else if (ret != 2)
+<     throw torrent::input_error("Could not parse host.");
+< 
+<   if (port < 1 || port > 65535)
+<     throw torrent::input_error("Invalid port number.");
+< 
+<   torrent::connection_manager()->resolver()(host, (int)rak::socket_address::pf_inet, SOCK_STREAM, call_remove_d_peer_t(download, port));
+< }
+< 
+660,661d600
+<   ADD_CD_STRING("remove_peer",     std::ptr_fun(&apply_d_remove_peer));
+<   ADD_CD_STRING("update_ID",       std::ptr_fun(&apply_update_ID));
+diff -r ./src/command_events.cc ../../original_source/rtorrent-0.8.6/src/command_events.cc
+148,157d147
+< /*
+< torrent::Object
+< apply_on_peer(){
+< 
+<   //rpc::commands.call("print", rpc::make_target(*itr), "Calling on_peer command.");
+<   return torrent::Object();
+< }
+< */
+< 
+< 
+380d369
+<   //ADD_COMMAND_LIST("on_peer", 	rak::bind_ptr_fn(&apply_on_state_change, "event.peer.found"));
+383d371
+<   //ADD_COMMAND_VOID("on_peer", 	rak::ptr_fn(&apply_on_peer));
+diff -r ./src/command_network.cc ../../original_source/rtorrent-0.8.6/src/command_network.cc
+179,218d178
+< 
+< torrent::Object
+< apply_group_throttle(const torrent::Object& rawArgs) {
+<   const torrent::Object::list_type& args = rawArgs.as_list();
+<   if (args.size() != 2 )
+<     throw torrent::input_error("Incorrect number of arguments.");
+< 
+<   unsigned int prefixWidth, ret;
+<   char dummy;
+<   char host[1024];
+<   rak::address_info* ai;
+<   torrent::Object::list_type::const_iterator itr = args.begin();
+< 
+<   itr++;
+<   ret = std::sscanf(itr->as_string().c_str(), "%1023[^/]/%d%c", host, &prefixWidth, &dummy);
+<   if (ret < 1 || rak::address_info::get_address_info(host, PF_INET, SOCK_STREAM, &ai) != 0)
+<     throw torrent::input_error("Could not resolve host.");
+< 
+<   uint32_t ip_address;
+<   rak::socket_address sa;
+<   sa.copy(*ai->address(), ai->length());
+<   ip_address = sa.sa_inet()->address_h();
+<   rak::address_info::free_address_info(ai);
+< 
+< 
+<   core::ThrottleMap::iterator throttleItr = control->core()->throttles().find(args.begin()->as_string().c_str());
+<   if (throttleItr == control->core()->throttles().end())
+<     throw torrent::input_error("Throttle not found.");
+< 
+<   //HERE add the IP to your local group? or even recompute your own ID?
+<   //and what if IP is leaving your group? DO STUFF HERE
+< 
+< 
+<   control->core()->set_group_throttle(ip_address, throttleItr->second);
+< 
+<   return torrent::Object();
+< }
+< 
+< 
+< 
+490d449
+<   ADD_COMMAND_LIST("throttle_grp",        rak::ptr_fn(&apply_group_throttle));
+Only in ./src/core: Makefile.bak
+diff -r ./src/core/download_list.cc ../../original_source/rtorrent-0.8.6/src/core/download_list.cc
+401c401
+<       rpc::call_command_void("d.get_connection_current", rpc::make_target(download)).as_string() == "initial_seed")
+---
+>         rpc::call_command_void("d.get_connection_current", rpc::make_target(download)).as_string() == "initial_seed")
+diff -r ./src/core/manager.cc ../../original_source/rtorrent-0.8.6/src/core/manager.cc
+218,241d217
+< 
+< void
+< Manager::set_group_throttle(uint32_t ip_address, torrent::ThrottlePair throttles) {
+<   std::pair<std::map<uint32_t,torrent::ThrottlePair>::iterator,bool> ret;
+<   //WHAT TO DO IF FALSE?
+<   ret = m_groupThrottles.insert( std::pair<uint32_t, torrent::ThrottlePair>(ip_address, throttles) );
+< 
+<   /* if !(ret->second) {
+< 	  char buffer[128];
+< 	  sprintf(buffer, "The IP address #### is already assigned to throttle group with throttles ####", );
+< 	  control->core()->push_log(buffer);	} */
+< 
+<   //I pretend I am address throttle - I need same functionality, yet if the address is in my "range" is decided by if that address is in my group...
+<   torrent::connection_manager()->set_address_throttle(sigc::mem_fun(control->core(), &core::Manager::get_group_throttle));
+< }
+< 
+< torrent::ThrottlePair
+< Manager::get_group_throttle(const sockaddr* addr) {
+<   std::map<uint32_t, torrent::ThrottlePair>::iterator it;
+<   it = m_groupThrottles.find(rak::socket_address::cast_from(addr)->sa_inet()->address_h());
+<   return (it == m_groupThrottles.end() ? torrent::ThrottlePair(NULL, NULL) : it->second);
+< }
+< 
+< 
+diff -r ./src/core/manager.h ../../original_source/rtorrent-0.8.6/src/core/manager.h
+98,104d97
+<   // Use custom throttle for the given group of IP addresses.
+< 
+<     void                  set_group_throttle(uint32_t ip_address, torrent::ThrottlePair throttles);
+<     torrent::ThrottlePair get_group_throttle(const sockaddr* addr);
+< 
+< 
+< 
+141d133
+<   typedef std::map<uint32_t, torrent::ThrottlePair> GroupThrottleMap;
+162,163d153
+<   GroupThrottleMap    m_groupThrottles;
+< 
+Only in ./src/display: Makefile.bak
+diff -r ./src/display/window_download_chunks_seen.cc ../../original_source/rtorrent-0.8.6/src/display/window_download_chunks_seen.cc
+63c63
+<   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(1)).round_seconds());	//there was 10
+---
+>   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(10)).round_seconds());
+diff -r ./src/display/window_download_transfer_list.cc ../../original_source/rtorrent-0.8.6/src/display/window_download_transfer_list.cc
+80c80
+<     for (torrent::BlockList::iterator bItr = (*itr)->begin(), bLast = (*itr)->end(); bItr != bLast; ++bItr) {
+---
+>     for (torrent::BlockList::const_iterator bItr = (*itr)->begin(), bLast = (*itr)->end(); bItr != bLast; ++bItr) {
+88d87
+< 
+92d90
+< 
+101,102c99
+<       } /*else if (bItr->queued()->size() >= 1) {
+< 		  // THIS SEGFAULTS!!!
+---
+>       } else if (bItr->queued()->size() >= 1) {
+105,106c102
+< 
+<       } */else {
+---
+>       } else {
+114d109
+< 
+116d110
+< 
+118d111
+< 
+136d128
+< 
+138d129
+< 
+141d131
+< 
+145d134
+< 
+148d136
+< 
+150d137
+< 
+168d154
+< 
+diff -r ./src/display/window_file_list.cc ../../original_source/rtorrent-0.8.6/src/display/window_file_list.cc
+118c118
+<   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(10)).round_seconds());		//there was 10
+---
+>   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(10)).round_seconds());
+diff -r ./src/display/window_log.cc ../../original_source/rtorrent-0.8.6/src/display/window_log.cc
+103c103
+<     priority_queue_insert(&taskScheduler, &m_taskUpdate, (cachedTime + rak::timer::from_seconds(30)).round_seconds());		//there was 30
+---
+>     priority_queue_insert(&taskScheduler, &m_taskUpdate, (cachedTime + rak::timer::from_seconds(30)).round_seconds());
+diff -r ./src/display/window_peer_list.cc ../../original_source/rtorrent-0.8.6/src/display/window_peer_list.cc
+65c65
+<   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(1)).round_seconds());	//there was 1 second .round_seconds()
+---
+>   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(1)).round_seconds());
+diff -r ./src/display/window_tracker_list.cc ../../original_source/rtorrent-0.8.6/src/display/window_tracker_list.cc
+60c60
+<   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(10)).round_seconds());		//there was 10
+---
+>   m_slotSchedule(this, (cachedTime + rak::timer::from_seconds(10)).round_seconds());
+Only in ./src/input: Makefile.bak
+Only in ./src: lnk.sh
+diff -r ./src/main.cc ../../original_source/rtorrent-0.8.6/src/main.cc
+72,74d71
+< //there was no fstream
+< #include <fstream>
+< 
+142c139
+<     return c->is_shutdown_started() ? rak::timer::from_milliseconds(100) : rak::timer::from_seconds(60);		//there was 60
+---
+>     return c->is_shutdown_started() ? rak::timer::from_milliseconds(100) : rak::timer::from_seconds(60);
+153,159d149
+< 	  //there was this not:
+< 	  //std::ofstream log("output.log");
+< 	  std::ofstream log("/dev/null");
+< 	  //std::ostream placeHolder = std::cout;
+< 	  //std::cout = log;
+< 	  std::cout.rdbuf(log.rdbuf());
+< 
+299c289
+<       control->core()->push_log("Ignoring ./.rtorrent.rc.");
+---
+>       control->core()->push_log("Ignoring ~/.rtorrent.rc.");
+301c291
+<       rpc::parse_command_single(rpc::make_target(), "try_import = ./.rtorrent.rc");
+---
+>       rpc::parse_command_single(rpc::make_target(), "try_import = ~/.rtorrent.rc");
+Only in ./src: output.log
+Only in ./src/rpc: Makefile.bak
+diff -r ./src/rpc/command_map.cc ../../original_source/rtorrent-0.8.6/src/rpc/command_map.cc
+157c157
+<   case Command::target_peer:	//return itr->second.m_peerSlot(itr->second.m_variable, target , arg); 	//??? I have no clue about this
+---
+>   case Command::target_peer:
+Only in ./src: rtorrent.bak
+Only in ./src: rtorrent.bak2
+Only in ./src: rtorrent_WS
+Only in ./src/ui: Makefile.bak
+Only in ./src/utils: Makefile.bak
